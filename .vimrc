@@ -1,7 +1,7 @@
 " .vimrc
 "
 " Author:   Larry Xu <hilarryxu@gmail.com>
-" Updated:  2018/02/03
+" Updated:  2019/04/16
 "
 " This file changes a lot.
 
@@ -33,10 +33,10 @@ set completeopt=longest,menu
 let do_syntax_sel_menu=1
 
 " tab, indent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set noexpandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
 set smarttab
 set autoindent
 set smartindent
@@ -96,7 +96,7 @@ if has("gui_running")
   set cursorcolumn
   set paste
   set autochdir
-  if has("win32")
+  if s:is_windows
     set guifont=Consolas_for_Powerline_FixedD:h10:cANSI
   endif
 endif
@@ -178,7 +178,7 @@ nnoremap <silent> <Leader>tp :call NilTogglePaste()<CR>
 nnoremap <silent> <Leader>tb :call NilToggleBackground()<CR>
 
 " stuff
-map <silent> <leader>ee :e $HOME/_vimrc<cr>
+map <silent> <Leader>ee :e $MYVIMRC<CR>
 nnoremap <silent> <Leader>ss :call NilStripTrailingWhitespaces()<CR>
 nnoremap <Leader>nh :nohlsearch<CR>
 nmap ? /\<\><Left><Left>
@@ -186,15 +186,15 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :qa!<CR>
 
 inoremap <C-g> <Esc>
-inoremap jj <Esc>
-inoremap jk <ESC>
+" inoremap jj <Esc>
+" inoremap jk <ESC>
 
 noremap <silent> <Left> :bp<CR>
 noremap <silent> <Right> :bn<CR>
-noremap <silent> <Up> :bdelete<CR>
+" noremap <silent> <Up> :bdelete<CR>
 
 " command {{{1
-if !(has('win32') || has('win64'))
+if !(s:is_windows)
   command! W w !sudo tee % > /dev/null
 endif
 
@@ -202,11 +202,6 @@ endif
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 autocmd FileType python set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
-autocmd FileType html set tabstop=2|set shiftwidth=2|set softtabstop=2|set expandtab
-autocmd FileType htmldjango set tabstop=2|set shiftwidth=2|set softtabstop=2|set expandtab
-autocmd FileType css set tabstop=2|set shiftwidth=2|set softtabstop=2|set expandtab
-autocmd FileType javascript set tabstop=2|set shiftwidth=2|set softtabstop=2|set expandtab
-autocmd FileType stylus set tabstop=2|set shiftwidth=2|set softtabstop=2|set expandtab
 
 " color {{{1
 autocmd ColorScheme * call matchadd('Todo', '\W\zs\(NOTICE\|WARNING\|DANGER\)')
@@ -217,7 +212,6 @@ command! Wcolor echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") .
     \ "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .
     \ "> fg:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")
 
-" set background=dark
 colorscheme torte
 
 " vim:set et sw=2 ts=2 fdm=marker fdl=0:
