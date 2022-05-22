@@ -5,6 +5,7 @@
 [core]
   autocrlf = false
   editor = vim
+  # excludesfile = ~/.gitignore_global
 
 [color]
   ui = true
@@ -45,7 +46,8 @@
   # diff
   d = diff                          # diff unstaged changes
   dc = diff --cached                # diff staged changes
-  last = diff HEAD^                 # diff last committed change
+  difflast = diff --cached HEAD^    # diff last committed change
+  dlast = diff HEAD^                # diff last committed change
 
   # log
   l = log --graph --date=short
@@ -53,6 +55,7 @@
   short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
   changelog = log --pretty=format:\" * %s\"
   shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+  last = log -1 HEAD
 
   # pull
   pl = pull                         # pull
