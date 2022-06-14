@@ -6,6 +6,8 @@
   autocrlf = false
   editor = vim
   # excludesfile = ~/.gitignore_global
+  # quotepath = false
+  # filemode = false
 
 [color]
   ui = true
@@ -126,6 +128,10 @@
 
 [diff]
   mnemonicprefix = true
+  tool = vimdiff
 
 [rerere]
   enabled = true
+
+[pull]
+  rebase = true
